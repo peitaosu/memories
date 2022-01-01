@@ -1,0 +1,80 @@
+extends layout
+
+block content
+  h1= title
+
+  .swiper
+    .swiper-wrapper#swiper_wrapper
+  
+  .expander
+    .expander-container.collapsed
+      .expander-content    
+        button#trigger
+            | ?
+  
+  button.fab-edit
+    | +
+
+  
+  script.
+    var current_time = new Date();
+    var current_year = current_time.getFullYear();
+    var current_month = current_time.getMonth() + 1;
+    var current_language = navigator.language.split("-")[0];
+    $.get("/api/v1/calendar", function (data, status) {
+      var weekday = data["weekday"][current_language];
+      var months = data["month"][current_language];
+      var current_year_data = data["date"][current_year];
+      for (const [month, weekdays] of Object.entries(current_year_data)) {
+        var swiper_wrapper = $("#swiper_wrapper");
+        swiper_wrapper.append($('<div class="swiper-slide" id="slide_' + month + '"></div>').append($('<div class="c-panel" id="panel_' + month + '"></div>')));
+        $("<div>", { "class": "c-header"}).append($("<div>", { "class": "c-title", "id": "title-" + month }).text(months[month] + " " + current_year)).appendTo($("#panel_" + month));
+        $("<div>", { "class": "c-weeks", "id": "weeks-" + month }).appendTo($("#panel_" + month));
+        weekday.forEach(wday => {
+          $("#weeks-" + month).append(
+            $("<div>", { "class": "c-weekday" }).append(wday)
+          );
+        });
+        weekdays.forEach(days => {
+          days.forEach(day => {
+            $("#weeks-" + month).append(
+              $("<div>", { "class": "c-day" }).append($("<span>", { "class": "c-day-content", "role": "button" }).append(day != 0 ? day : ""))
+            );
+          });
+        });
+      }
+      var swiper = new Swiper(".swiper", {
+        initialSlide: current_month
+      });
+      $(".c-day").on("mouseenter", (event)=>{
+        if ($(".expander-container.expanded").length > 0){
+          $(".expander-container").removeClass("expanded").addClass("collapsed");
+        }
+        $(".expander-container").toggleClass("collapsed").toggleClass("expanded");
+      });
+      $(".c-day").on("mouseleave", (event)=>{
+        if ($(".expander-container.expanded").length > 0){
+          $(".expander-container").removeClass("expanded").addClass("collapsed");
+        }
+      });
+    });
+
+    const button = $('#trigger');
+    const picker = new EmojiButton({
+      position: 'auto',
+      emojiSize: "4em",
+      showCategoryButtons: false,
+      showSearch: false,
+      zIndex: 999,
+      theme: "auto",
+      rootElement: document.getElementsByClassName("expander")[0]
+    });
+
+    picker.on('emoji', emoji => {
+      $("#trigger").text(emoji);
+    });
+
+    button.on('click', () => {
+      picker.togglePicker(button);
+    });
+
