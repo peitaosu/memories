@@ -24,7 +24,7 @@ block content
     $.get("/api/v1/calendar", function (data, status) {
       var weekday = data["weekday"][current_language];
       var months = data["month"][current_language];
-      var current_year_data = data["date"][current_year];
+      var current_year_data = data["date"]["global"][current_year];
       for (const [month, weekdays] of Object.entries(current_year_data)) {
         var swiper_wrapper = $("#swiper_wrapper");
         swiper_wrapper.append($('<div class="swiper-slide" id="slide_' + month + '"></div>').append($('<div class="c-panel" id="panel_' + month + '"></div>')));
@@ -44,18 +44,13 @@ block content
         });
       }
       var swiper = new Swiper(".swiper", {
-        initialSlide: current_month
+        initialSlide: current_month - 1
       });
       $(".c-day").on("mouseenter", (event)=>{
         if ($(".expander-container.expanded").length > 0){
           $(".expander-container").removeClass("expanded").addClass("collapsed");
         }
         $(".expander-container").toggleClass("collapsed").toggleClass("expanded");
-      });
-      $(".c-day").on("mouseleave", (event)=>{
-        if ($(".expander-container.expanded").length > 0){
-          $(".expander-container").removeClass("expanded").addClass("collapsed");
-        }
       });
     });
 
