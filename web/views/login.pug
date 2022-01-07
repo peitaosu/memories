@@ -3,13 +3,13 @@ extends layout
 block content
     h1= title
     form
-        input(type='text' name='email' placeholder='Email' required) 
-        input(type='password' name='password' placeholder='Password' required)
-        input#login(type='button' value='Login')
+        input.login(type='text' name='email' placeholder='Email' required) 
+        input.login(type='password' name='password' placeholder='Password' required)
+        input.login#login(type='button' value='Login')
 
     script.
         $('#login').on('click', () => {
-            $.post('/login',  {email: $('input[name='email']').val(), password: $('input[name='password']').val()}, (data) => {
+            $.post('/login',  {email: $('input[name="email"]').val(), password: $('input[name="password"]').val()}, (data) => {
                 window.location.href = '/';
             });
         });
