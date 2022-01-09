@@ -28,7 +28,7 @@ router.route('/calendar')
 
 router.route('/users')
     .get((req, res) => {
-        var sql = "select * from user"
+        var sql = "select id, name, email, active from user"
         var params = []
         db.all(sql, params, (err, rows) => {
             if (err) {
@@ -44,7 +44,7 @@ router.route('/users')
 
 router.route('/user/:id')
     .get((req, res, next) => {
-        var sql = "select * from user where id = ?"
+        var sql = "select id, name, email, active from user where id = ?"
         var params = [req.params.id]
         db.get(sql, params, (err, row) => {
             if (err) {
@@ -74,7 +74,8 @@ router.route('/user')
         var data = {
             name: req.body.name,
             email: req.body.email,
-            password: md5(req.body.password)
+            password: md5(req.body.password),
+            active: true
         }
         var sql = 'INSERT INTO user (name, email, password) VALUES (?,?,?)'
         var params = [data.name, data.email, data.password]
