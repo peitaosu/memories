@@ -20,6 +20,7 @@ let db = new sqlite3.Database(path.join(db_dir, db_file), (err) => {
             name text, 
             email text UNIQUE, 
             password text, 
+            active INTEGER,
             CONSTRAINT email_unique UNIQUE (email)
             )`,
         (err) => {

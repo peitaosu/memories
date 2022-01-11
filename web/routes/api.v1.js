@@ -77,8 +77,8 @@ router.route('/user')
             password: md5(req.body.password),
             active: true
         }
-        var sql = 'INSERT INTO user (name, email, password, active) VALUES (?,?,?)'
-        var params = [data.name, data.email, data.password]
+        var sql = 'INSERT INTO user (name, email, password, active) VALUES (?,?,?,?)'
+        var params = [data.name, data.email, data.password, data.active]
         db.run(sql, params, function (err, result) {
             if (err) {
                 res.status(400).json({ "error": err.message })
