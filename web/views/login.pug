@@ -1,11 +1,16 @@
 extends layout
 
 block content
-    h1= title
-    form
-        input.login(type='text' name='email' placeholder='Email' required) 
-        input.login(type='password' name='password' placeholder='Password' required)
-        input.login#login(type='button' value='Login')
+    .col-12
+        h1= title
+    .col-12
+        form
+            .col-12.mb-2.mt-2
+                input.form-control(type='text' name='email' placeholder='Email' required) 
+            .col-12.mb-2.mt-2
+                input.form-control(type='password' name='password' placeholder='Password' required)
+            .col-12.mb-2.mt-2
+                input.btn.btn-info.btn-block#login(type='button' value='Login')
 
     script.
         $('#login').on('click', () => {
