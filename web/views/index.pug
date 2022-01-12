@@ -1,17 +1,19 @@
 extends layout
 
 block content
-    h1= title
+    .col-12
+        h1= title
 
-    .swiper
-        .swiper-wrapper#swiper_wrapper
-  
-    .expander
-        .expander-container.collapsed
-        .expander-content    
-            button#trigger
-                | ?
-  
+    .col-12
+        .swiper
+            .swiper-wrapper#swiper_wrapper
+    
+        .expander
+            .expander-container.collapsed
+            .expander-content    
+                button#trigger
+                    | ?
+
     button.fab-edit
         | +
 
