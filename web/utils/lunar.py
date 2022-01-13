@@ -1,43 +1,14 @@
-import json, time
+class Lunar:
+    def __init__(self, year, month, day, leap):
+        self.leap = leap
+        self.day = day
+        self.month = month
+        self.year = year
 
-dates = {
-    "month": {
-        "zh": {
-            "1": "一月",
-            "2": "二月",
-            "3": "三月",
-            "4": "四月",
-            "5": "五月",
-            "6": "六月",
-            "7": "七月",
-            "8": "八月",
-            "9": "九月",
-            "10": "十月",
-            "11": "十一月",
-            "12": "十二月"
-        }
-    },
-    "weekday": {
-        "en": [
-            "S",
-            "M",
-            "T",
-            "W",
-            "T",
-            "F",
-            "S"
-        ],
-        "zh": [
-            "日",
-            "一",
-            "二",
-            "三",
-            "四",
-            "五",
-            "六"
-        ]
-    },
-    "date": {}
-}
-years = list(range(2000, 2100))
-months = list(range(1, 13))
+
+class Solar:
+    def __init__(self, year, month, day):
+        self.day = day
+        self.month = month
+        self.year = year
+
