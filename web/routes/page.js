@@ -38,7 +38,7 @@ router.post('/login', (req, res, next) => {
             res.status(404).json({ 'error': 'user not found.' });
             return;
         }
-        res.cookie('logged-in-email', row['email'], {maxAge: 360000, signed: true}).cookie('logged-in-id', row['id'], {maxAge: 360000, signed: true}).status(200).json(row);
+        res.cookie('logged-in-email', row['email'], {maxAge: 7*24*60*60*1000, signed: true}).cookie('logged-in-id', row['id'], {maxAge: 7*24*60*60*1000, signed: true}).status(200).json(row);
     });
 });
 
