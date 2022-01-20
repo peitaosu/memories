@@ -1,0 +1,13 @@
+{
+    "user": {
+        "id": 0,
+        "email": "test@email.com"
+    },
+    "timestamp": 1000000000000,
+    "lunar": ["lunar"],
+    "mark": [],
+    "dot": [],
+    "memory": [],
+    "emoji": [],
+    "note": []
+}
