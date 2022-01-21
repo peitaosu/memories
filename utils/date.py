@@ -54,16 +54,18 @@ dates = {
             "六"
         ]
     },
-    "date": {}
+    "date": {
+        "global": {}
+    }
 }
 years = list(range(2000, 2100))
 months = list(range(1, 13))
 dates["timestamp"] = int(time.time() * 1000)
 for year in years:
     for month in months:
-        if year not in dates["date"]:
-            dates["date"][year] = {}
-        if month not in dates["date"][year]:
-            dates["date"][year][month] = calendar.monthcalendar(year, month)
-with open("calendar.json", "w", encoding='utf-8') as out_file:
+        if year not in dates["date"]["global"]:
+            dates["date"]["global"][year] = {}
+        if month not in dates["date"]["global"][year]:
+            dates["date"]["global"][year][month] = calendar.monthcalendar(year, month)
+with open("calendar.json", "w", encoding="utf-8") as out_file:
     json.dump(dates, out_file, indent=4, ensure_ascii=False)
